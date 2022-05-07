@@ -14,6 +14,8 @@ npx cap sync
 <docgen-index>
 
 * [`echo(...)`](#echo)
+* [`authenticate(...)`](#authenticate)
+* [Interfaces](#interfaces)
 
 </docgen-index>
 
@@ -33,5 +35,32 @@ echo(options: { value: string; }) => Promise<{ value: string; }>
 **Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
 
 --------------------
+
+
+### authenticate(...)
+
+```typescript
+authenticate(options: SignInOptions) => Promise<{ ckWebAuthToken: string; }>
+```
+
+| Param         | Type                                                    |
+| ------------- | ------------------------------------------------------- |
+| **`options`** | <code><a href="#signinoptions">SignInOptions</a></code> |
+
+**Returns:** <code>Promise&lt;{ ckWebAuthToken: string; }&gt;</code>
+
+--------------------
+
+
+### Interfaces
+
+
+#### SignInOptions
+
+| Prop                      | Type                                       |
+| ------------------------- | ------------------------------------------ |
+| **`containerIdentifier`** | <code>string</code>                        |
+| **`environment`**         | <code>'development' \| 'production'</code> |
+| **`ckAPIToken`**          | <code>string</code>                        |
 
 </docgen-api>
