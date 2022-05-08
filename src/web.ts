@@ -16,7 +16,7 @@ export class CloudKitWeb extends WebPlugin implements CloudKitPlugin {
             window.removeEventListener('message', listener);
             if (event.data.ckSession) {
               resolve({
-                ckWebAuthToken: 'token',
+                ckWebAuthToken: encodeURIComponent(event.data.ckSession),
               });
             } else if (event.data.errorMessage) {
               reject(event.data.errorMessage);

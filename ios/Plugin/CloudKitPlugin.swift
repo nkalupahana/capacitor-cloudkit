@@ -21,21 +21,29 @@ public class CloudKitPlugin: CAPPlugin {
         let operation = CKFetchWebAuthTokenOperation(apiToken: call.getString("ckAPIToken") ?? "")
         let opClosure = { (webToken: String?, error: Error?) in
             if let error = error {
+                print("start")
+                print(error)
+                print(call.getString("ckAPIToken") ?? "")
+                print("end")
                 call.reject(error.localizedDescription)
             } else {
+                let uriComponent = NSCharacterSet(charactersIn: ";,/?:@&=+$# ").inverted
                 call.resolve([
-                    "ckWebAuthToken": webToken!
+                    "ckWebAuthToken": webToken!.addingPercentEncoding(withAllowedCharacters: uriComponent)!
                 ])
             }
         }
         
         if #available(iOS 15.0, *) {
-            operation.fetchWebAuthTokenCompletionBlock = opClosure
+            operation.fetchWebAuthTokenResultBlock = { res in
+                print(call.getString("ckAPIToken") ?? "")
+                print(res)
+            }
         } else {
             operation.fetchWebAuthTokenCompletionBlock = opClosure
         }
         
         operation.qualityOfService = .utility
-        CKContainer.default().privateCloudDatabase.add(operation)
+        CKContainer(identifier: call.getString("containerIdentifier") ?? "").privateCloudDatabase.add(operation)
     }
 }
