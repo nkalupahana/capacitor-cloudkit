@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -31,7 +30,6 @@ public class SignInWithCloudKit extends AppCompatActivity {
             }
         });
         webview.getSettings().setJavaScriptEnabled(true);
-        Log.e("URI", getIntent().getData().toString());
         webview.loadUrl(getIntent().getData().toString());
     }
 

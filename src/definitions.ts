@@ -5,6 +5,5 @@ export interface SignInOptions {
 }
 
 export interface CloudKitPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
   authenticate(options: SignInOptions): Promise<{ ckWebAuthToken: string }>;
 }

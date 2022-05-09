@@ -7,16 +7,7 @@ import CloudKit
  * here: https://capacitorjs.com/docs/plugins/ios
  */
 @objc(CloudKitPlugin)
-public class CloudKitPlugin: CAPPlugin {
-    private let implementation = CloudKit()
-
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.resolve([
-            "value": implementation.echo(value)
-        ])
-    }
-        
+public class CloudKitPlugin: CAPPlugin {        
     @objc func authenticate(_ call: CAPPluginCall) {
         let operation = CKFetchWebAuthTokenOperation(apiToken: call.getString("ckAPIToken") ?? "")
         let opClosure = { (webToken: String?, error: Error?) in
