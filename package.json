@@ -1,6 +1,6 @@
 {
   "name": "capacitor-cloudkit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Basic CloudKit authentication plugin.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
