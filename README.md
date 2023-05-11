@@ -1,6 +1,6 @@
 # capacitor-cloudkit
 
-Basic CloudKit authentication plugin.
+Basic CloudKit authentication plugin. v1 is Capacitor 4, v2 is Capacitor 5.
 
 ## Install
 
