@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CloudKitPlugin, SignInOptions } from './definitions';
+import type { CloudKitPlugin, FetchRecordOptions, SignInOptions } from './definitions';
 
 export class CloudKitWeb extends WebPlugin implements CloudKitPlugin {
   authenticate(options: SignInOptions): Promise<{ ckWebAuthToken: string }> {
@@ -28,5 +28,9 @@ export class CloudKitWeb extends WebPlugin implements CloudKitPlugin {
         window.open((await login.json())['redirectURL']);
       })();
     });
+  }
+
+  fetchRecord(_: FetchRecordOptions): Promise<any> {
+    throw new Error('Method not available on web.');
   }
 }

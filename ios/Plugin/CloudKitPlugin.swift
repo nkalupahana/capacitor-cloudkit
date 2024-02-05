@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
 import SafariServices
+import CloudKit
 
 /**
  * Please read the Capacitor iOS Plugin Development Guide
@@ -46,5 +47,52 @@ public class CloudKitPlugin: CAPPlugin {
             
             call.reject("Invalid API response.");
         }.resume()
+    }
+    
+    @objc func fetchRecord(_ call: CAPPluginCall) {
+        let container = CKContainer(identifier: call.getString("containerIdentifier") ?? "");
+        let databaseStr = call.getString("database") ?? "";
+        var database: CKDatabase? = nil
+        if databaseStr == "public" {
+            database = container.publicCloudDatabase
+        } else if databaseStr == "private" {
+            database = container.privateCloudDatabase
+        } else if databaseStr == "shared" {
+            database = container.sharedCloudDatabase
+        }
+        
+        if database == nil {
+            return call.reject("Database value not valid!")
+        }
+        
+        
+        let recordBy = call.getString("by") ?? ""
+        var recordID: CKRecord.ID? = nil
+        if recordBy == "recordName" {
+            recordID = CKRecord.ID(recordName: call.getString("recordName") ?? "")
+        }
+        
+        if recordID == nil {
+            return call.reject("Record fetch method (by) not specified!")
+        }
+        
+        database!.fetch(withRecordID: recordID!) { record, err in
+            if err != nil {
+                call.reject(err?.localizedDescription ?? "Record fetch error")
+            }
+            
+            var res: [String: Any] = [:]
+            if record == nil {
+                call.resolve(res)
+            }
+
+            for key in record!.allKeys() {
+                if let value = record![key] {
+                    res[key] = value
+                }
+            }
+            
+            call.resolve(res)
+        }
     }
 }

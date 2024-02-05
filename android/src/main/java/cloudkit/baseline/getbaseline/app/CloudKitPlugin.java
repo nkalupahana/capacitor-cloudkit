@@ -68,4 +68,9 @@ public class CloudKitPlugin extends Plugin {
             call.reject(e.getLocalizedMessage());
         }
     }
+
+    @PluginMethod
+    public void fetchRecord(PluginCall call) {
+        call.unavailable("Method not available on Android.");
+    }
 }

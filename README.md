@@ -32,6 +32,7 @@ if (url.scheme == "PUT CALLBACK URL SCHEME HERE (e.g. cloudkit-icloud.baseline.g
 <docgen-index>
 
 * [`authenticate(...)`](#authenticate)
+* [`fetchRecord(...)`](#fetchrecord)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -54,6 +55,23 @@ authenticate(options: SignInOptions) => Promise<{ ckWebAuthToken: string; }>
 --------------------
 
 
+### fetchRecord(...)
+
+```typescript
+fetchRecord(options: FetchRecordOptions) => Promise<any>
+```
+
+Only available on iOS.
+
+| Param         | Type                                                              |
+| ------------- | ----------------------------------------------------------------- |
+| **`options`** | <code><a href="#fetchrecordoptions">FetchRecordOptions</a></code> |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -64,5 +82,15 @@ authenticate(options: SignInOptions) => Promise<{ ckWebAuthToken: string; }>
 | **`containerIdentifier`** | <code>string</code>                        |
 | **`environment`**         | <code>'development' \| 'production'</code> |
 | **`ckAPIToken`**          | <code>string</code>                        |
+
+
+#### FetchRecordOptions
+
+| Prop                      | Type                                           |
+| ------------------------- | ---------------------------------------------- |
+| **`containerIdentifier`** | <code>string</code>                            |
+| **`database`**            | <code>'private' \| 'public' \| 'shared'</code> |
+| **`by`**                  | <code>'recordName'</code>                      |
+| **`recordName`**          | <code>string</code>                            |
 
 </docgen-api>
