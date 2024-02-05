@@ -78,12 +78,12 @@ public class CloudKitPlugin: CAPPlugin {
         
         database!.fetch(withRecordID: recordID!) { record, err in
             if err != nil {
-                call.reject(err?.localizedDescription ?? "Record fetch error")
+                return call.reject(err?.localizedDescription ?? "Record fetch error")
             }
             
             var res: [String: Any] = [:]
             if record == nil {
-                call.resolve(res)
+                return call.resolve(res)
             }
 
             for key in record!.allKeys() {
